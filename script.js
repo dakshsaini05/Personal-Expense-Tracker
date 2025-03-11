@@ -1,18 +1,32 @@
-//Get the btn element
-const element = document.querySelector("#btnCounter");
+// Init value of expense at 0
+let totalExpense = 0;
 
-// Take a number that starts from zero
-let counter = 0;
+// get the heading element
+const headingEl = document.querySelector("#headingTotal");
 
-// Read the input from counterNumber and convert it in number
-const counterNumber = parseInt(document.querySelector("#counterNumber").value);
-// console.log(counterNumber);
+// set the heading element to totalExpense at 0
+headingEl.textContent = totalExpense;
 
-// Function to increment the counter by 1
-function counterIncrement() {
-    counter += counterNumber;
-    console.log(counter);
+// onButtonClick add inputAmount to totalExpense
+function addExpenseToTotal() {
+    // Read value from inputAmount
+    const inputElement = document.querySelector("#inputAmount");
+    const textAmount = inputElement.value;
+
+    // convert it to number 
+    const expense = parseInt(textAmount, 10); 
+
+    // add that value to totalExpense 
+    totalExpense += expense;
+    console.log(totalExpense);
+
+    // set the heading element to totalExpense
+    headingEl.textContent = totalExpense;
 }
 
+
+//Get the btn element
+const element = document.querySelector("#btnAddExpense");
+
 // Listen to click event on btn
-element.addEventListener("click", counterIncrement);
+element.addEventListener("click", addExpenseToTotal);
