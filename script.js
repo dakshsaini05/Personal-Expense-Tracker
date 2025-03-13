@@ -7,6 +7,9 @@ const headingEl = document.querySelector("#headingTotal");
 // get the inputAmount 
 const inputElement = document.querySelector("#inputAmount"); 
 
+// Get the table 
+const expenseTableEl = document.querySelector("#expenseTable");
+
 // get the desc element 
 const inputDescEl = document.querySelector("#inputDesc");
 
@@ -37,15 +40,28 @@ function addExpenseToTotal() {
     // console.log(expenseItem);
 
     allExpenses.push(expenseItem);
-    console.clear();
-    console.table(allExpenses);
 
     // add that value to totalExpense 
     totalExpense += expense;
     // console.log(totalExpense);
 
     // set the heading element to totalExpense
-    headingEl.textContent = totalExpense;
+    const someText = `Total: ${totalExpense}`;
+    headingEl.textContent = someText;
+
+    // Show the table here 
+    const data1 = allExpenses[0];
+    const data2 = allExpenses[1];
+
+    const data1Text = `${data1.desc} :: ${data1.amount}`;
+    const data2Text = `${data2.desc} :: ${data2.amount}`;
+
+    const textTable = `
+        <div>${data1Text}</div>
+        <div>${data2Text}</div>
+    `;
+
+    expenseTableEl.innerHTML = textTable;
 }
 
 
