@@ -50,18 +50,26 @@ function addExpenseToTotal() {
     headingEl.textContent = someText;
 
     // Show the table here 
-    const data1 = allExpenses[0];
-    const data2 = allExpenses[1];
+    // const data1 = allExpenses[0];
+    // const data2 = allExpenses[1];
 
-    const data1Text = `${data1.desc} :: ${data1.amount}`;
-    const data2Text = `${data2.desc} :: ${data2.amount}`;
+    // const data1Text = `${data1.desc} :: ${data1.amount}`;
+    // const data2Text = `${data2.desc} :: ${data2.amount}`;
 
-    const textTable = `
-        <div>${data1Text}</div>
-        <div>${data2Text}</div>
-    `;
+    // const textTable = `
+    //     <div>${data1Text}</div>
+    //     <div>${data2Text}</div>
+    // `;
 
-    expenseTableEl.innerHTML = textTable;
+    const allExpenseHtml = allExpenses.map(expense => {
+        return `<div>${expense.desc} :: ${expense.amount}</div>`
+    });
+    // console.log(allExpenseHtml);
+
+    const joinedAllExpenseHtml = allExpenseHtml.join(' ');
+    console.log(joinedAllExpenseHtml);
+
+    expenseTableEl.innerHTML = joinedAllExpenseHtml;
 }
 
 
