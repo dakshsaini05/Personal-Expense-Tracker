@@ -5,7 +5,7 @@ let totalExpense = 0;
 const headingEl = document.querySelector("#headingTotal");
 
 // get the inputAmount 
-const inputElement = document.querySelector("#inputAmount");
+const inputElement = document.querySelector("#inputAmount"); 
 
 // Get the table 
 const expenseTableEl = document.querySelector("#expenseTable");
@@ -17,7 +17,7 @@ const inputDescEl = document.querySelector("#inputDesc");
 headingEl.textContent = totalExpense;
 
 // allExpense at one place in an array
-const allExpenses = [];
+const allExpenses = [];  
 
 // onButtonClick add inputAmount to totalExpense
 function addExpenseToTotal() {
@@ -31,12 +31,11 @@ function addExpenseToTotal() {
     const textDesc = inputDescEl.value;
 
     // convert it to number 
-    const expense = parseInt(textAmount, 10);
+    const expense = parseInt(textAmount, 10); 
 
     // put all data in object
     expenseItem.amount = expense;
     expenseItem.desc = textDesc;
-    expenseItem.moment = new Date();
 
     // console.log(expenseItem);
 
@@ -62,7 +61,9 @@ function addExpenseToTotal() {
     //     <div>${data2Text}</div>
     // `;
 
-    const allExpenseHtml = allExpenses.map(expense => createListItem(expense));
+    const allExpenseHtml = allExpenses.map(expense => {
+        return `<div>${expense.desc} :: ${expense.amount}</div>`
+    });
     // console.log(allExpenseHtml);
 
     const joinedAllExpenseHtml = allExpenseHtml.join(' ');
@@ -77,34 +78,3 @@ const element = document.querySelector("#btnAddExpense");
 
 // Listen to click event on btn
 element.addEventListener("click", addExpenseToTotal);
-
-
-// Controller Functions 
-function getDateString(momento) {
-    return momento.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    })
-}
-
-// View layer 
-// Making a function for putting the data in the table(destructuring)
-function createListItem({ desc, amount, moment }) {
-    return `
-        <li class="list-group-item d-flex justify-content-between">
-            <div class="d-flex flex-column">
-                ${desc}
-                <small class="text-muted">${getDateString(moment)}</small>
-            </div>
-            <div>
-                <span class="px-5">
-                    ${amount}   
-                </span>
-                <button type="button" class="btn btn-outline-danger btn-sm">
-                    <i class="fas fa-trash-alt"></i>
-                </button>
-            </div>
-        </li>
-    `
-}
