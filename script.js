@@ -62,13 +62,7 @@ function addExpenseToTotal() {
     //     <div>${data2Text}</div>
     // `;
 
-    const allExpenseHtml = allExpenses.map(expense => createListItem(expense));
-    // console.log(allExpenseHtml);
-
-    const joinedAllExpenseHtml = allExpenseHtml.join(' ');
-    console.log(joinedAllExpenseHtml);
-
-    expenseTableEl.innerHTML = joinedAllExpenseHtml;
+    renderList(allExpenses);
 }
 
 
@@ -80,6 +74,8 @@ element.addEventListener("click", addExpenseToTotal);
 
 
 // Controller Functions 
+
+// Get the date sting 
 function getDateString(momento) {
     return momento.toLocaleDateString('en-US', {
         year: 'numeric',
@@ -88,7 +84,26 @@ function getDateString(momento) {
     })
 }
 
+// Delete Items
+function deleteItem(dateValue) {
+    const newArr = [];
+    console.log("Delete item was called", dateValue);
+    for(let i=0;i<allExpenses.length;i++) {
+        if(allExpenses[i].moment.valueOf() !== dateValue) newArr.push(allExpenses[i]);
+    }
+
+    renderList(newArr);
+}
+
 // View layer 
+
+// Rendering the list 
+function renderList(arrOfList) {
+    const allExpenseHtml = arrOfList.map(expense => createListItem(expense));
+    const joinedAllExpenseHtml = allExpenseHtml.join(' ');
+    expenseTableEl.innerHTML = joinedAllExpenseHtml;
+}
+
 // Making a function for putting the data in the table(destructuring)
 function createListItem({ desc, amount, moment }) {
     return `
@@ -101,7 +116,11 @@ function createListItem({ desc, amount, moment }) {
                 <span class="px-5">
                     ${amount}   
                 </span>
-                <button type="button" class="btn btn-outline-danger btn-sm">
+                <button 
+                    type="button" 
+                    class="btn btn-outline-danger btn-sm"
+                    onclick="deleteItem(${moment.valueOf()})"
+                    >
                     <i class="fas fa-trash-alt"></i>
                 </button>
             </div>
